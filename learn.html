@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoring Service Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">
+                <a href="index.html" class="link">Bloom</a>
+            </div>
+            <div class="links">
+                <a href="learnmore.html" class="link">Mehr erfahren</a>
+            </div>
+        </div>
+        <!-- New form for lesson code -->
+        <div class="lesson-code-form">
+            <form id="lessonForm" onsubmit="connectToLesson(event)" style="display: flex; flex-direction: column; align-items: center;">
+                <label for="lessonCode" style="font-size: 1.5em; color: #333;">Enter Lesson Code:</label>
+                <input type="text" id="lessonCode" name="lessonCode" required style="margin-bottom: 5px; font-size: 1.5em; padding: 10px;">
+                <button type="submit" class="button" style="font-size: 1.5em; padding: 14px 28px; margin-top: -10px;">Connect</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function connectToLesson(event) {
+            event.preventDefault();
+            const lessonCode = document.getElementById('lessonCode').value;
+            const url = `https://live.bloom.boo/de/${lessonCode}?password=secret123&uid=QEYL7kDq0cPUaqFXiOlxzCMbPb93#cam=1&mic=1&video=1&audio=1&chat=0&theme_color=cyan&worksheet=1`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
