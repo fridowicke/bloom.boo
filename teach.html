@@ -36,8 +36,6 @@
             event.preventDefault();
             const lessonCode = document.getElementById('lessonCode').value;
             const lessonPassword = document.getElementById('lessonPassword').value;
-            // const url = 'http://live.bloom.boo/admin/' + lessonCode + '?adminPassword=' + lessonPassword;
-            // const url = `https://live.bloom.boo/de/${lessonCode}?password=secret123&uid=QEYL7kDq0cPUaqFXiOlxzCMbPb93#cam=1&mic=1&video=1&audio=1&chat=0&theme_color=cyan&worksheet=1`;
             const url = `https://live.bloom.boo/de/admin/${lessonCode}?adminPassword=${lessonPassword}`;
             window.open(url, '_blank');
         }
