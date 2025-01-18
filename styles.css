@@ -112,3 +112,49 @@ html, body {
     padding: 20px;
     font-size: 48px; /* adjust the size as needed */
 }
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .header {
+        flex-direction: row; /* Beibehaltung der horizontalen Anordnung */
+        justify-content: space-between; /* Platzierung der Elemente an den Enden */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .title a.link {
+        font-size: 36px; /* kleinere Schriftgröße für mobile Geräte */
+    }
+
+    .links {
+        flex-direction: row; /* Beibehaltung der horizontalen Anordnung */
+        gap: 10px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .links a.link {
+        font-size: 18px; /* kleinere Schriftgröße für mobile Geräte */
+    }
+
+    .button {
+        font-size: 36px; /* kleinere Schriftgröße für mobile Geräte */
+        padding: 15px 30px;
+    }
+
+    .shortsummary {
+        font-size: 36px; /* kleinere Schriftgröße für mobile Geräte */
+        margin-top: -300px; /* Weiter nach oben verschieben */
+        width: 80%; /* Breite anpassen */
+    }
+
+    .maintext {
+        font-size: 18px; /* kleinere Schriftgröße für mobile Geräte */
+        width: 90%; /* Breite anpassen */
+    }
+}
