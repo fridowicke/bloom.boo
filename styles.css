@@ -108,7 +108,7 @@ html, body {
     text-align: center;
     margin: 0;
     margin-top: -400px; /* move the summary up by 20px */
-    width: 30%; /* adjust width as needed */
+    width: 35%; /* adjust width as needed */
     padding: 20px;
     font-size: 48px; /* adjust the size as needed */
 }

@@ -14,15 +14,27 @@
                 <a href="index.html" class="link">Bloom</a>
             </div>
             <div class="links">
-                <a href="learnmore.html" class="link">Mehr erfahren</a>
+                <a href="learnmore.html" class="link" id="learn-more-link">Mehr erfahren</a>
             </div>
         </div>
         <div class="shortsummary">
-            <a>Nachhilfe 1-5. Klasse <br>nur 5.99€</a>
+            <a id="summary-text">Nachhilfe 1-5. Klasse <br>nur 5.99€</a>
         </div>
-        <a href="https://wa.me/41772796255?text=Hi!%20Ich%20%2F%20mein%20Sohn%20%2F%20meine%20Tochter%20braucht%20Unterstützung%20in%20Mathe%20für%20die%20Klassenstufe%20___" target="_blank">
-            <button class="button">Gratis Probestunde</button>
+        <a href="https://app.youform.com/forms/xiw33zxd" target="_blank">
+            <button class="button" id="trial-button">Gratis Probestunde</button>
         </a>
     </div>
+    <script>
+        // Detect the user's language
+        const userLang = navigator.language || navigator.userLanguage;
+
+        // Check if the language is not German
+        if (!userLang.startsWith('de')) {
+            // Change text to English
+            document.getElementById('learn-more-link').textContent = 'Learn More';
+            document.getElementById('summary-text').innerHTML = 'Tutoring for age 6-14 <br>only $5.99';
+            document.getElementById('trial-button').textContent = 'Free Trial Lesson';
+        }
+    </script>
 </body>
 </html>
