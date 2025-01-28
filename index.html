@@ -38,7 +38,8 @@
         const userLang = navigator.language || navigator.userLanguage;
 
         // Check if the language is not German
-        if (!userLang.startsWith('de')) {
+        // if (!userLang.startsWith('de')) {
+        if (false) {
             // Change text to English
             document.getElementById('learn-more-link').textContent = 'Learn More';
             document.getElementById('summary-text').innerHTML = 'Tutoring for age 6-14 <br>only $5.99';
