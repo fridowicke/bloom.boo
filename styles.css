@@ -157,4 +157,9 @@ html, body {
         font-size: 18px; /* kleinere Schriftgröße für mobile Geräte */
         width: 90%; /* Breite anpassen */
     }
+
+    .shortsummary #summary-text {
+        /* Force the text onto two lines and prevent any auto-wrapping */
+        white-space: nowrap;
+    }
 }
