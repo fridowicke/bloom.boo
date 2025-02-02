@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4NXESTKJYP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-4NXESTKJYP');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragebogen</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Allgemein */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: rgb(217, 204, 191);
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Container, der den ganzen Viewport einnimmt */
+        .question-screen {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        /* Wenn der Screen aktiv sein soll */
+        .question-screen.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .question-screen h2 {
+            font-size: 28px;
+            color: purple;
+            margin-bottom: 20px;
+        }
+        
+        /* Grid-Container */
+        .grid-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        /* Grid-Option-Stile: wie der "Gratis Probestunde"-Button */
+        .grid-option {
+            border: 2px solid purple;
+            background-color: white;
+            color: purple;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .grid-option:hover {
+            transform: scale(1.05);
+        }
+        
+        .grid-option img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 8px;
+        }
+        
+        /* Markierung der ausgewählten Option */
+        .grid-option.selected {
+            background-color: purple;
+            color: white;
+        }
+        
+        /* Absende-Button */
+        .button {
+            margin-top: 30px;
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            background-color: purple;
+            color: white;
+            transition: transform 0.2s;
+        }
+        
+        .button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Screen 1: Frage nach dem Fach -->
+    <div id="screen1" class="question-screen active">
+        <h2>Wähle das Fach:</h2>
+        <div class="grid-options">
+            <div class="grid-option" data-value="Mathe">
+                <img src="/img/mathe.svg" alt="Mathe Icon">
+                <div>Mathe</div>
+            </div>
+            <div class="grid-option" data-value="Deutsch">
+                <img src="/img/deutsch.svg" alt="Deutsch Icon">
+                <div>Deutsch</div>
+            </div>
+            <div class="grid-option" data-value="Physik">
+                <img src="/img/physik.svg" alt="Physik Icon">
+                <div>Physik</div>
+            </div>
+            <div class="grid-option" data-value="anderes Fach">
+                <img src="/img/anderes.svg" alt="Anderes Fach Icon">
+                <div>anderes Fach</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screen 2: Frage nach dem Lernziel -->
+    <div id="screen2" class="question-screen">
+        <h2>Wähle dein Lernziel:</h2>
+        <div class="grid-options">
+            <div class="grid-option" data-value="Noten Verbessern">
+                <div>Noten Verbessern</div>
+            </div>
+            <div class="grid-option" data-value="Hausaufgabenbetreuung">
+                <div>Hausaufgabenbetreuung</div>
+            </div>
+            <div class="grid-option" data-value="Talentförderung">
+                <div>Talentförderung</div>
+            </div>
+            <div class="grid-option" data-value="anderes Ziel">
+                <div>anderes Ziel</div>
+            </div>
+        </div>
+        <button id="submitBtn" class="button">Absenden</button>
+    </div>
+
+    <script>
+        // Ergebnisse sammeln
+        const results = {};
+
+        // Funktion zum Wechseln zwischen Screens
+        function switchScreen(currentScreen, nextScreen) {
+            // Entferne den aktiven Status, sodass per CSS der Übergang (Fade, Translate) eintritt
+            currentScreen.classList.remove('active');
+            // Nach Übergangszeit (600ms) den aktuellen Screen ausblenden und den nächsten anzeigen
+            setTimeout(() => {
+                currentScreen.style.display = 'none';
+                nextScreen.style.display = 'flex';
+                // Kurze Verzögerung, damit der Browser den neuen Display-Wert übernimmt
+                setTimeout(() => {
+                    nextScreen.classList.add('active');
+                }, 50);
+            }, 600);
+        }
+        
+        // Event-Handler für Screen 1: Fach auswählen
+        document.querySelectorAll('#screen1 .grid-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Markierung setzen (nur eine Option pro Screen)
+                document.querySelectorAll('#screen1 .grid-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                // Ergebnis speichern
+                results['Fach'] = this.getAttribute('data-value');
+                // Wechsle zu Screen 2
+                const screen1 = document.getElementById('screen1');
+                const screen2 = document.getElementById('screen2');
+                switchScreen(screen1, screen2);
+            });
+        });
+        
+        // Event-Handler für Screen 2: Auswahl markieren
+        document.querySelectorAll('#screen2 .grid-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('#screen2 .grid-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                // Ergebnis speichern
+                results['Lernziel'] = this.getAttribute('data-value');
+            });
+        });
+        
+        // Formular-Submit: Bei Klick auf "Absenden" die Resultate auswerten
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            // Hier kann ggf. noch überprüft werden, ob in Screen 2 eine Option gewählt wurde
+            console.log('Ausgewählte Optionen:', results);
+            // Weitere Verarbeitungslogik (z.B. AJAX-Request) kann hier eingefügt werden
+        });
+    </script>
+
+</body>
+</html>
